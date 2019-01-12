@@ -1,0 +1,129 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <p id="demo"></p>
+        Real time:<p id="realtime"></p>
+        Neo time:<p id="neotime"></p>
+        <script>
+            gPosition = {
+                coords:{
+                    latitude:47.627974599999995,
+                    longitude:-122.33983709999998
+                }
+            };
+            gSun = {};
+            function checkDigit(i) {
+                if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+                return i;
+            }
+            function formatDateYMD(date) {
+                var d = new Date(date),
+                    month = '' + (d.getMonth() + 1),
+                    day = '' + d.getDate(),
+                    year = d.getFullYear();
+            
+                if (month.length < 2) month = '0' + month;
+                if (day.length < 2) day = '0' + day;
+            
+                return [year, month, day].join('-');
+            }
+            function startTime() {
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                h = checkDigit(h);
+                m = checkDigit(m);
+                s = checkDigit(s);
+                document.getElementById('realtime').innerHTML = h + ":" + m + ":" + s;
+
+                // map 06:00 to sunrise
+                // map 18:00 to sunset
+                // map 12:00 to solar noon
+                const sec_in_6_hrs = 60*60*6;
+
+                // a date is a value in milliseconds...
+                const noon = new Date(gSun.solar_noon);
+                const sunrise = new Date(gSun.sunrise);
+                const sunset = new Date(gSun.sunset);
+                //var srToNoon = (noon-sunrise)/1000;
+                //var noonToSunset = (sunset-noon)/1000;
+
+
+                // lerp.
+                // afternoon:
+                if (today-noon > 0) {
+                    const alpha = (today-noon)/(sunset-noon);
+                    let sec = alpha * sec_in_6_hrs;
+                    h = Math.floor(sec/(60*60));
+                    sec = sec - ((h)*60*60);
+                    h = h + 12;
+                    m = 0 + Math.floor(sec/60);
+                    sec = sec - (m*60);
+                    s = Math.floor(sec);
+                }
+                else {
+                    const alpha = (today-sunrise)/(noon-sunrise);
+                    let sec = alpha * sec_in_6_hrs;
+
+                    h = Math.floor(sec/(60*60));
+                    sec = sec - ((h)*60*60);
+                    h = h + 6;
+                    m = 0 + Math.floor(sec/60);
+                    sec = sec - (m*60);
+                    s = Math.floor(sec);
+                }
+
+                h = checkDigit(h);
+                m = checkDigit(m);
+                s = checkDigit(s);
+                document.getElementById('neotime').innerHTML = h + ":" + m + ":" + s;
+
+                var t = setTimeout(startTime, 1000);
+            }
+            function onGetCurrentPosition(p) {
+                gPosition = p;
+                // sunrise/sunset api
+                const sunset = 'https://api.sunrise-sunset.org/json?';
+                const url = sunset + "lat=" + p.coords.latitude + "&lng=" + p.coords.longitude + "&formatted=0&date=" + formatDateYMD(new Date());
+
+                fetch(url)
+                .then(function(response) {
+                    return response.json();
+                  })
+                  .then(function(myJson) {
+                    //{
+                    //    "results":
+                    //    {
+                    //      "sunrise":"7:27:02 AM",
+                    //      "sunset":"5:05:55 PM",
+                    //      "solar_noon":"12:16:28 PM",
+                    //      "day_length":"9:38:53",
+                    //      "civil_twilight_begin":"6:58:14 AM",
+                    //      "civil_twilight_end":"5:34:43 PM",
+                    //      "nautical_twilight_begin":"6:25:47 AM",
+                    //      "nautical_twilight_end":"6:07:10 PM",
+                    //      "astronomical_twilight_begin":"5:54:14 AM",
+                    //      "astronomical_twilight_end":"6:38:43 PM"
+                    //    },
+                    //     "status":"OK"
+                    //  } 
+                      if (myJson.status === "OK") {
+                          gSun = myJson.results;
+                          startTime();
+                      }
+                  });  
+            }
+            function getLocation() {
+              if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(onGetCurrentPosition);
+              } else {
+                var x = document.getElementById("demo");
+                x.innerHTML = "Geolocation is not supported by this browser.";
+              }
+            }
+            getLocation();
+        </script>
+    </body>
+</html>
