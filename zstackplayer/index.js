@@ -8,7 +8,7 @@ function pad(num, size) {
 }
 
 const url = new URL(window.location.href);
-numstacks = url.searchParams.get('n');
+let numstacks = url.searchParams.get('n');
 if (numstacks) {
     numstacks = parseInt(numstacks, 10);
 }

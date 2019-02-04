@@ -9068,7 +9068,7 @@ function pad(num, size) {
 }
 
 var url = new URL(window.location.href);
-numstacks = url.searchParams.get('n');
+var numstacks = url.searchParams.get('n');
 if (numstacks) {
     numstacks = parseInt(numstacks, 10);
 }
