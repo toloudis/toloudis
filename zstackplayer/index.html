@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" height="100%" width="100%">
+<head>
+    <meta charset="UTF-8">
+    <title>AICS 3D Volume Viewer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  .input-range {
+    height: 200px;
+    width: 20px;
+    outline: none;
+    -webkit-appearance: slider-vertical; /* WebKit */
+  }
+  .btn {
+    background-color: DodgerBlue; /* Blue background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    /* padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+
+    transform: rotate(-90deg);
+  }
+
+    /* Darker background on mouse-over */
+    .btn:hover {
+      background-color: RoyalBlue;
+    }
+    </style>
+</head>
+<body height="100%" width="100%">
+    Image:<select id="cellselecter" name="cell">
+        <option disabled selected value> -- select an image -- </option>
+        <option value="AICS-11_409_atlas.json">TOM20</option>
+        <option value="AICS-12_881_atlas.json">Tubulin</option>
+        <option value="AICS-13_319_atlas.json">LaminB</option>
+        <option value="AICS-12_261.ome.tif2k_atlas.json">2k_FF</option>
+        <option value="AICS-12_261.ome.tif4k_atlas.json">4k_FF</option>
+    </select>
+    <br/>
+
+    <div id="zstackplayer" height="600px" width="600px" style="position:relative; width:600px; height:600px;">
+        <div id="imagecontainer" height="560px" width="560px" style="position:absolute; top:0px; left:0px; width:560px; height:560px;"></div>
+
+        <button class="btn" id="play" style="position:absolute; top:100px; left:585px;"><i class="fa fa-play"></i></button>
+
+        <button class="btn" id="nextslide" style="position:absolute; top:0px; left:560px;"><i class="fa fa-step-forward"></i></button>
+        <input style="position:absolute; top:20px; left:560px" class="input-range" id="rangeslider" orient="vertical" type="range" step="1" value="0" min="0" max="1">    
+        <button class="btn" id="prevslide" style="position:absolute; top:224px; left:560px;"><i class="fa fa-step-backward"></i></button>
+        
+        <button id="autobtn" style="position:absolute; bottom:20px">Auto</button>
+    </div>
+
+    
+<script type="text/javascript" src="/zstackplayer/zstackplayer.bundle.js"></script></body>
+</html>
