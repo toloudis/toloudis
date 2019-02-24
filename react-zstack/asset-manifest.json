@@ -1,13 +1,13 @@
 {
-  "main.css": "/static/css/main.d1e77dac.chunk.css",
-  "main.js": "/static/js/main.d1834f36.chunk.js",
-  "main.js.map": "/static/js/main.d1834f36.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.fdfcfda2.js",
-  "runtime~main.js.map": "/static/js/runtime~main.fdfcfda2.js.map",
-  "static/js/2.40b857b2.chunk.js": "/static/js/2.40b857b2.chunk.js",
-  "static/js/2.40b857b2.chunk.js.map": "/static/js/2.40b857b2.chunk.js.map",
-  "index.html": "/index.html",
-  "precache-manifest.cc0eaa2ceab70b4e3c77256c1a1acedb.js": "/precache-manifest.cc0eaa2ceab70b4e3c77256c1a1acedb.js",
-  "service-worker.js": "/service-worker.js",
-  "static/css/main.d1e77dac.chunk.css.map": "/static/css/main.d1e77dac.chunk.css.map"
+  "main.css": "/react-zstack/static/css/main.d1e77dac.chunk.css",
+  "main.js": "/react-zstack/static/js/main.90ab1584.chunk.js",
+  "main.js.map": "/react-zstack/static/js/main.90ab1584.chunk.js.map",
+  "runtime~main.js": "/react-zstack/static/js/runtime~main.29935875.js",
+  "runtime~main.js.map": "/react-zstack/static/js/runtime~main.29935875.js.map",
+  "static/js/2.40b857b2.chunk.js": "/react-zstack/static/js/2.40b857b2.chunk.js",
+  "static/js/2.40b857b2.chunk.js.map": "/react-zstack/static/js/2.40b857b2.chunk.js.map",
+  "index.html": "/react-zstack/index.html",
+  "precache-manifest.f73a1b0a9c2db5d6a3a0150718557ef9.js": "/react-zstack/precache-manifest.f73a1b0a9c2db5d6a3a0150718557ef9.js",
+  "service-worker.js": "/react-zstack/service-worker.js",
+  "static/css/main.d1e77dac.chunk.css.map": "/react-zstack/static/css/main.d1e77dac.chunk.css.map"
 }
